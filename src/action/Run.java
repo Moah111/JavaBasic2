@@ -13,10 +13,6 @@ public class Run {
 	public static void main(String[] args) {
 		
 		List<Classes> classList = FileIO.readClass();
-		
-		
-		
-		
 		while (true) {
 			System.out.println("MENU");
 			System.out.println("1: Create Classes ");

@@ -36,8 +36,22 @@ public class Classes {
 	@Override
 	public String toString() {
 		return  id +","+ subject
-				+","+  professorName +","+listStudent ;
+				+","+  professorName +"," + toStringStr(listStudent) ;
 	}
+
+	private String toStringStr(List<Student> listStudent) {
+		String line = "";
+		for (int i = 0; i < listStudent.size(); i ++) {
+			Student student = listStudent.get(i);
+			line = line + student.getID() + "|" + student.getTitle() + "|" + student.getFullName() +"|" + student.getSubjectNote();
+			if (!(i == listStudent.size() -1) ) {
+				line += ":";
+			}
+
+		}
+		return line;
+	}
+
 	public Classes(){
 		
 	}

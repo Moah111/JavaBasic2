@@ -13,6 +13,8 @@ import java.util.Scanner;
 import universitat.edu.Classes;
 import universitat.edu.Student;
 
+import javax.swing.*;
+
 public class FileIO {
 
 	public static List<Classes> readClass() {
@@ -22,18 +24,21 @@ public class FileIO {
 			File cl = new File("Classes.txt");
 			Scanner scanner = new Scanner(new FileInputStream(cl));
 			while (scanner.hasNext()) {
-
-				String[] arrClass = scanner.nextLine().split(",");
-				String[] array = Run.listStudent.toArray(new String[0]);
-				
-
-				classResult.add(new Classes(arrClass[0], arrClass[1],
-						arrClass[2], Run.listStudent));
+				String line = scanner.nextLine();
+				String[] arrClass = line.split(",");
+				String[] students = arrClass[3].split(":");
+				List<Student> studentsList = new ArrayList<>();
+                for (String student : students) {
+                    String[] studentSplit = student.split("\\|");
+                    studentsList.add(new Student(studentSplit[0], studentSplit[1], studentSplit[2], studentSplit[3]));
+                }
+				Classes classes = new Classes(arrClass[0], arrClass[1], arrClass[2], studentsList);
+				classResult.add(classes);
 			}
 
 			scanner.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 		return classResult;
